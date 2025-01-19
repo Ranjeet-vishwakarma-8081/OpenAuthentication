@@ -4,7 +4,7 @@ import {
   useGoogleLogin,
   googleLogout,
 } from "@react-oauth/google";
-
+import ReactGA from "react-ga4";
 const GoogleAuth = () => {
   const [user, setUser] = useState(null);
 
@@ -20,6 +20,12 @@ const GoogleAuth = () => {
           setUser(userInfo);
         })
         .catch((err) => console.error("Error fetching user info:", err));
+
+      ReactGA.event({
+        category: "button",
+        action: "Click",
+        label: "Login with Google",
+      });
     },
     onError: () => {
       console.error("Login Failed");
@@ -34,7 +40,20 @@ const GoogleAuth = () => {
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Google OAuth 2.0 Login/Logout</h2>
+      <h2>Hi there!</h2>
+      <h2>
+        Welcome to
+        <span
+          style={{
+            color: "#843248",
+          }}
+        >
+          {" "}
+          Ranjeet Vishwakarma
+        </span>{" "}
+        world!
+      </h2>
+      <h3>Login/Logout with Google OAuth 2.0 </h3>
       {!user ? (
         <button
           onClick={() => login()}
